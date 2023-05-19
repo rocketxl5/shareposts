@@ -59,7 +59,7 @@
                         $type = PDO::PARAM_BOOL;
                         break;
                     default:
-                        $type = PDO::PARAM_NUL;
+                    $type = PDO::PARAM_NULL;
                 }
             }
 
@@ -79,6 +79,7 @@
 
         // Get single record as object
         public function single() {
+        $this->execute();
             return $this->stmt->fetch(PDO::FETCH_OBJ);
         }
 

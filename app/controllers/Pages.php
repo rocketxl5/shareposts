@@ -1,14 +1,18 @@
 <?php
     class Pages extends Controller {
-        public function __construct() {
 
+        // Models are instantited in the controllers constructor
+        public function __construct() {
+            $this->postModel = $this->model('Post');
         }
 
         public function index() {
+            $posts = $this->postModel->getPosts();
 
             $data = [
                 'title' => 'SharePosts',
-                'description' => 'Post sharing netword built on MVC framework'
+                'description' => 'Post sharing netword built on MVC framework',
+                'posts' => $posts
             ];
 
             $this->view('pages/index', $data);
