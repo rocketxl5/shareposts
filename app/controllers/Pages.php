@@ -3,16 +3,14 @@
 
         // Models are instantited in the controllers constructor
         public function __construct() {
-            $this->postModel = $this->model('Post');
+           
         }
 
         public function index() {
-            $posts = $this->postModel->getPosts();
 
             $data = [
                 'title' => 'SharePosts',
-                'description' => 'Post sharing netword built on MVC framework',
-                'posts' => $posts
+                'description' => 'Post sharing netword built on MVC framework'
             ];
 
             $this->view('pages/index', $data);

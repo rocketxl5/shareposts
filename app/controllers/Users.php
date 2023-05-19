@@ -36,11 +36,9 @@
                 if(empty($data['email'])) {
                     $data['email_err'] = 'Please enter your email';
                     // Check if Email exist in database
-                } else {
-                    if($this->userModel->findUserByEmail($data['email'])) {
+                } elseif($this->userModel->findUserByEmail($data['email'])) {
                         // Email already exist id db
                         $data['email_err'] = 'Email already exist';
-                    }
                 }
 
                 // Validate Password
@@ -59,8 +57,17 @@
 
                 // Make sure errors are empty
                 if(empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
-                    // Validated
-                    die('Success');
+                    
+                    // Hash Password
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                    // Register User
+                    if($this->userModel->register($data)) {
+                        // Redirect user
+                       redirect('users/login');
+                    } else {
+                        die('Something went wrong @ $this->userModel->register($data)');
+                    }
                 }
 
                 $this->view('users/register', $data);
