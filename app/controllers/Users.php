@@ -157,6 +157,7 @@
             }
         }
 
+        // Create session variable upon user login
         public function createUserSession($user) {
             // Create session variables
             $_SESSION['user_id'] = $user->id;
@@ -167,7 +168,8 @@
             redirect('pages/index');
          }
 
-         public function logout() {
+        // Destroy session variables on logout
+        public function logout() {
             // Delete session variables
             unset($_SESSION['user_id']);
             unset($_SESSION['user_name']);
@@ -176,5 +178,14 @@
             session_destroy();
             // Redirect user
             redirect('users/login');
-         }
+        }
+
+        // Check if user is logged in
+        public function isLoggedIn() {
+            if(isset($_SESSION['user_id'])) {
+                return true;
+            } else {
+                return false;
+            }
+        } 
     }
