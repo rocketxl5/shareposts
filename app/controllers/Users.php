@@ -166,4 +166,15 @@
             // Redirect user
             redirect('pages/index');
          }
+
+         public function logout() {
+            // Delete session variables
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_name']);
+            unset($_SESSION['user_email']);
+            // Destroy session
+            session_destroy();
+            // Redirect user
+            redirect('users/login');
+         }
     }
