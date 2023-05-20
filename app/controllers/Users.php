@@ -130,7 +130,7 @@
                     // All good
                     if($loggedInUser) {
                         // Create Session
-                        die('Success');
+                        $this->createUserSession($loggedInUser);
 
                     // Wrong password
                     } else {
@@ -156,4 +156,14 @@
                 $this->view('users/login', $data);
             }
         }
+
+        public function createUserSession($user) {
+            // Create session variables
+            $_SESSION['user_id'] = $user->id;
+            $_SESSION['user_name'] = $user->name;
+            $_SESSION['user_email'] = $user->email;
+
+            // Redirect user
+            redirect('pages/index');
+         }
     }
