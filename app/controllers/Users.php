@@ -179,14 +179,5 @@
             session_destroy();
             // Redirect user
             redirect('users/login');
-        }
-
-        // Check if user is logged in
-        public function isLoggedIn() {
-            if(isset($_SESSION['user_id'])) {
-                return true;
-            } else {
-                return false;
-            }
-        } 
+    }   
     }
