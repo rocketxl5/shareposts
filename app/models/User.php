@@ -25,9 +25,9 @@
 
         // Register New User
         public function register($data) {
-
+            // Query to insert new user in db 
             $this->db->query("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
-            // Bind values
+            // Bind values to named parameters
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':password', $data['password']);

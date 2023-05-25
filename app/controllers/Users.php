@@ -1,6 +1,7 @@
 <?php
     class Users extends Controller {
-
+    public $userModel;
+        
         public function __construct() {
             $this->userModel = $this->model('User');
         }
@@ -164,8 +165,8 @@
             $_SESSION['user_name'] = $user->name;
             $_SESSION['user_email'] = $user->email;
 
-            // Redirect user
-            redirect('pages/index');
+        // Redirect user
+        redirect('posts');
          }
 
         // Destroy session variables on logout

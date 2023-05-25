@@ -3,7 +3,7 @@
 
         // Models are instantited in the controllers constructor
         public function __construct() {
-           
+            
         }
 
         public function index() {
