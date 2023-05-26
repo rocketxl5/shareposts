@@ -6,23 +6,6 @@
             $this->db = new Database;
         }
 
-        // Find User by Email
-        public function findUserByEmail($email) {
-        
-            $this->db->query("SELECT * FROM users WHERE email = :email");
-            // Bind values
-            $this->db->bind(':email', $email);
-
-            $row = $this->db->single();
-            
-            // Check row
-            if($this->db->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
         // Register New User
         public function register($data) {
             // Query to insert new user in db 
@@ -56,5 +39,34 @@
             } else {
                 return false;
             }
+        }
+
+        // Find User by Email
+        public function findUserByEmail($email) {
+    
+            $this->db->query("SELECT * FROM users WHERE email = :email");
+            // Bind values
+            $this->db->bind(':email', $email);
+
+            $row = $this->db->single();
+            
+            // Check row
+            if($this->db->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Find User by Email
+        public function getUserById($id) {
+    
+            $this->db->query("SELECT * FROM users WHERE id = :id");
+            // Bind values
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->single();
+            
+            return $row;
         }
     }

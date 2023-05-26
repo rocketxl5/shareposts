@@ -9,6 +9,7 @@
             }
 
             $this->postModel = $this->model('Post');
+            $this->userModel = $this->model('User');
         }
 
         public function index() {
@@ -20,9 +21,9 @@
             $this->view('posts/index', $data);
         }
 
-        
+        // Handles Post request received from add.php view
         public function add() {
-            // If add post form is sent
+            // If post form is sent
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Sanitize POST array
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -58,6 +59,7 @@
                     // Load view with errors
                     $this->view('posts/add', $data);
                 }
+            // Send generic view with empty fields
             } else {
                 $data = [
                     'title' => '',
@@ -66,5 +68,19 @@
     
                 $this->view('posts/add', $data);
             }
+        }
+
+        // Handles the display details of a single post
+        // Called on click of achor button (More) on posts/index.php view
+        public function show($id) {
+            // Fetch single post from db
+            $post = $this->postModel->getPostById($id);
+            $user = $this->userModel->getUserById($post->user_id);
+            $data = [
+                'post' => $post,
+                'user' => $user
+            ];
+
+            $this->view('posts/show', $data);
         }
     }
