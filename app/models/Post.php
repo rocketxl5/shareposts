@@ -27,7 +27,18 @@
             return $results;
         }
 
-        public function addPost($post) {
-
+        public function addPost($data) {
+            // Query to insert new user in db 
+            $this->db->query("INSERT INTO posts (title, body, user_id) VALUES (:title, :body, :user_id)");
+            // Bind values to named parameters
+            $this->db->bind(':title', $data['title']);
+            $this->db->bind(':body', $data['body']);
+            $this->db->bind(':user_id', $data['user_id']);
+            
+            if($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
